@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vineeth Rajesh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg:      #faf9f7;
+    --surface: #f2f0ec;
+    --border:  #e0ddd8;
+    --text:    #1c1c1a;
+    --muted:   #6b6862;
+    --faint:   #b0aba4;
+    --accent:  #2d6a4f;      /* deep green — trustworthy, not loud */
+    --accent-l:#d8eedf;      /* light tint */
+    --tag-bg:  #edeae5;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ── LAYOUT ── */
+  .wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250,249,247,0.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.9rem 0;
+  }
+  nav .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.05rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--text);
+  }
+  .nav-links {
+    display: flex;
+    gap: 1.75rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  #hero {
+    padding: 5rem 0 4.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-text {}
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  #hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(2.6rem, 5vw, 3.8rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.2rem;
+    color: var(--text);
+  }
+  #hero h1 em {
+    font-style: italic;
+    color: var(--muted);
+  }
+  .hero-bio {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.75;
+    margin-bottom: 2rem;
+  }
+  .hero-links {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    padding: 0.55rem 1.1rem;
+    border-radius: 100px;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .pill-solid {
+    background: var(--accent);
+    color: #fff;
+  }
+  .pill-solid:hover { opacity: 0.85; }
+  .pill-outline {
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: transparent;
+  }
+  .pill-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Photo placeholder */
+  .hero-photo {
+    width: 170px;
+    height: 170px;
+    border-radius: 12px;
+    background: var(--surface);
+    border: 1px dashed var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .hero-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    display: none; /* shown once you add an image */
+  }
+  .photo-hint {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--faint);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.6;
+    padding: 0 0.75rem;
+  }
+  .photo-icon { font-size: 1.75rem; opacity: 0.3; }
+
+  /* ── SECTION TEMPLATE ── */
+  .section {
+    padding: 4rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .section:last-of-type { border-bottom: none; }
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── ABOUT ── */
+  #about p {
+    color: var(--muted);
+    max-width: 640px;
+    font-size: 0.97rem;
+    line-height: 1.8;
+  }
+
+  /* ── EXPERIENCE ── */
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 148px 1fr;
+    gap: 0 2rem;
+    padding: 1.75rem 0;
+    border-top: 1px solid var(--border);
+  }
+  .exp-item:last-child { border-bottom: 1px solid var(--border); }
+  .exp-meta {
+    padding-top: 0.1rem;
+  }
+  .exp-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--faint);
+    line-height: 1.6;
+  }
+  .exp-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.15rem;
+    line-height: 1.3;
+  }
+  .exp-org {
+    font-size: 0.8rem;
+    color: var(--faint);
+    margin-bottom: 0.8rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+  }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+  .exp-bullets li {
+    font-size: 0.88rem;
+    color: var(--muted);
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.65;
+  }
+  .exp-bullets li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 1.1rem;
+    line-height: 1.45;
+  }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.85rem; }
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+    background: var(--tag-bg);
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+
+  /* ── PROJECTS ── */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    transition: box-shadow 0.18s, transform 0.18s;
+  }
+  .project-card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    transform: translateY(-2px);
+  }
+  .project-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .project-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  .project-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.18rem 0.5rem;
+    border-radius: 100px;
+    background: var(--accent-l);
+    color: var(--accent);
+    white-space: nowrap;
+    margin-top: 0.1rem;
+  }
+  .project-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+    color: var(--faint);
+  }
+  .project-desc {
+    font-size: 0.87rem;
+    color: var(--muted);
+    line-height: 1.65;
+    flex: 1;
+  }
+  .project-card.placeholder {
+    background: transparent;
+    border-style: dashed;
+    align-items: center;
+    justify-content: center;
+    min-height: 160px;
+    cursor: default;
+  }
+  .project-card.placeholder:hover { transform: none; box-shadow: none; }
+  .placeholder-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── PUBLICATION ── */
+  .pub-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.75rem 2rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+    align-items: start;
+    transition: box-shadow 0.18s;
+  }
+  .pub-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+  .pub-icon-col {
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    background: var(--accent-l);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+  }
+  .pub-venue {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+  .pub-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 1.05rem;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.55rem;
+  }
+  .pub-authors {
+    font-size: 0.78rem;
+    color: var(--faint);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  .pub-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid var(--accent-l);
+    padding-bottom: 1px;
+    transition: border-color 0.15s;
+  }
+  .pub-link:hover { border-color: var(--accent); }
+
+  /* ── SKILLS ── */
+  /* Tag cloud grouped by category — visual but not resume-table */
+  .skills-cloud { display: flex; flex-direction: column; gap: 1.25rem; }
+  .skill-group { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+  .skill-group-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    min-width: 68px;
+  }
+  .skill-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    padding: 0.32rem 0.75rem;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: var(--surface);
+    letter-spacing: 0.02em;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .chip:hover { border-color: var(--accent); color: var(--accent); }
+  .chip.featured {
+    background: var(--accent-l);
+    border-color: transparent;
+    color: var(--accent);
+  }
+
+  /* ── CONTACT ── */
+  #contact .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 2rem;
+  }
+  .contact-copy p {
+    font-size: 0.97rem;
+    color: var(--muted);
+    max-width: 420px;
+    line-height: 1.75;
+  }
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
+  }
+  .contact-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.03em;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 1px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .contact-link:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2rem 0 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border);
+    margin-top: 0;
+  }
+  footer span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--faint);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 680px) {
+    .wrap { padding: 0 1.25rem; }
+    #hero { grid-template-columns: 1fr; padding: 3.5rem 0 3rem; }
+    .hero-photo { width: 120px; height: 120px; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .exp-date { margin-bottom: 0.4rem; }
+    .project-grid { grid-template-columns: 1fr; }
+    .pub-card { grid-template-columns: 1fr; }
+    #contact .contact-inner { grid-template-columns: 1fr; }
+    .contact-links { align-items: flex-start; }
+    nav .wrap { flex-wrap: wrap; gap: 0.75rem; }
+    .nav-links { gap: 1rem; }
+    footer { flex-direction: column; gap: 0.4rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="wrap">
+    <span class="nav-name">Vineeth Rajesh</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#publication">Research</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Computer Engineering · UW · Class of 2027</div>
+      <h1>Vineeth<br/><em>Rajesh.</em></h1>
+      <p class="hero-bio">
+        Junior at the University of Washington. Currently doing undergraduate research at Seattle Children's Hospital, applying machine learning to problems in neuroscience. Looking for internships in ML, software engineering, or research.
+      </p>
+      <div class="hero-links">
+        <a href="#contact" class="pill pill-solid">Get in touch</a>
+        <a href="https://linkedin.com/in/vineethrajesh383" target="_blank" class="pill pill-outline">LinkedIn ↗</a>
+        <a href="https://github.com/" target="_blank" class="pill pill-outline">GitHub ↗</a>
+      </div>
+    </div>
+
+    <!-- PHOTO — swap the src below with your image path, then remove display:none from the img rule in CSS -->
+    <div class="hero-photo">
+      <img src="photo.jpg" alt="Vineeth Rajesh"/>
+      <div class="photo-icon">🪪</div>
+      <div class="photo-hint">Add photo.jpg<br/>to your folder</div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <div class="section" id="about">
+    <div class="section-head reveal">
+      <span class="section-label">About</span>
+      <div class="section-rule"></div>
+    </div>
+    <p class="reveal">I'm interested in applied machine learning — building things that work on real problems. I have a peer-reviewed publication in <em>Frontiers of Medicine</em> and like working on projects that push past what I already know. I've been doing research since high school, co-founded a startup at a hackathon, and led a 100-person robotics team. Always looking for the next interesting thing to build.</p>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="section" id="experience">
+    <div class="section-head reveal">
+      <span class="section-label">Experience</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="exp-list">
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-date">Dec 2025<br/>Present</div>
+        </div>
+        <div>
+          <div class="exp-title">Undergraduate Researcher</div>
+          <div class="exp-org">Tang Lab · Seattle Children's Hospital & UW</div>
+          <ul class="exp-bullets">
+            <li>Built an end-to-end literature extraction pipeline querying research papers, parsing abstracts, and organizing architectures into structured datasets.</li>
+            <li>Apply LLMs to screen and rank computational architectures against theoretical properties associated with global state and awareness-like coordination mechanisms.</li>
+            <li>Evaluating ML and computational neuroscience architectures against frameworks from consciousness research.</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag">LLMs</span><span class="tag">Python</span><span class="tag">Neuroscience AI</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-date">Jan 2020<br/>Jun 2024</div>
+        </div>
+        <div>
+          <div class="exp-title">Research Intern</div>
+          <div class="exp-org">Burkitt Lymphoma Fund for Africa · BLFA</div>
+          <ul class="exp-bullets">
+            <li>Co-first author on a peer-reviewed paper in <em>Frontiers of Medicine</em> — an open-access AI diagnostic tool for early detection of Burkitt Lymphoma.</li>
+            <li>Designed and trained a CNN to classify hematopathology slides with researchers at UW, Fred Hutch, PhenoPath, and Microsoft.</li>
+            <li>Deployed model using Microsoft Azure and Google Colab for distributed training, optimized for low-resource settings.</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag">CNNs</span><span class="tag">Computer Vision</span><span class="tag">Azure</span><span class="tag">PyTorch</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-date">May 2024<br/>Apr 2025</div>
+        </div>
+        <div>
+          <div class="exp-title">President, FRC Robotics Team</div>
+          <div class="exp-org">Eastlake High School · FIRST Robotics Competition</div>
+          <ul class="exp-bullets">
+            <li>Led a 100+ member team across engineering, business, and outreach divisions.</li>
+            <li>Raised over $50,000 through sponsorships, grants, and community fundraising.</li>
+            <li>Directed robotics summer camps for nearly 200 students.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="section" id="projects">
+    <div class="section-head reveal">
+      <span class="section-label">Projects</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="project-grid">
+
+      <div class="project-card reveal">
+        <div class="project-card-top">
+          <span class="project-name">Tag!</span>
+          <span class="project-badge">Active</span>
+        </div>
+        <div class="project-sub">Full-Stack Mobile · DubHacks 2025</div>
+        <p class="project-desc">Gamified skill-learning social app with video posting, user tagging, and difficulty-based progression. Integrated 12Labs multimodal AI for automated video verification. Invited to present at a 12Labs webinar to the Head of Developer Experience.</p>
+        <div class="tag-row">
+          <span class="tag">Flutter</span><span class="tag">JavaScript</span><span class="tag">C++</span><span class="tag">12Labs API</span>
+        </div>
+      </div>
+
+      <!-- Duplicate this card block when you have a new project -->
+      <div class="project-card placeholder reveal">
+        <span class="placeholder-label">More coming soon</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PUBLICATION -->
+  <div class="section" id="publication">
+    <div class="section-head reveal">
+      <span class="section-label">Publication</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="pub-card reveal">
+      <div class="pub-icon-col">📄</div>
+      <div>
+        <div class="pub-venue">Frontiers in Medicine · 2024 · Co-First Author</div>
+        <div class="pub-title">An AI-Based, Open-Access Diagnostic Tool for Early Diagnosis of Burkitt Lymphoma</div>
+        <div class="pub-authors">Vineeth Rajesh, Nikil Nambiar, Akshay Ashok, Sunil Nambiar, Renini Ashok, Rajesh Uthamanthil, Teresa Lotodo, Shachi Mittal, Steven Kussick. <em>Frontiers in Medicine</em>, 2024;11:1345611. PMID: 38903819</div>
+        <a href="https://doi.org/10.3389/fmed.2024.1345611" target="_blank" class="pub-link">doi.org/10.3389/fmed.2024.1345611 ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="section" id="skills">
+    <div class="section-head reveal">
+      <span class="section-label">Skills</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="skills-cloud reveal">
+      <div class="skill-group">
+        <span class="skill-group-name">Languages</span>
+        <div class="skill-chips">
+          <span class="chip featured">Python</span>
+          <span class="chip featured">JavaScript</span>
+          <span class="chip featured">C++</span>
+          <span class="chip">Java</span>
+          <span class="chip">Dart</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-group-name">ML / AI</span>
+        <div class="skill-chips">
+          <span class="chip featured">PyTorch</span>
+          <span class="chip featured">CNNs</span>
+          <span class="chip featured">LLMs</span>
+          <span class="chip">TensorFlow</span>
+          <span class="chip">scikit-learn</span>
+          <span class="chip">Computer Vision</span>
+          <span class="chip">NumPy</span>
+          <span class="chip">Pandas</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-group-name">Tools</span>
+        <div class="skill-chips">
+          <span class="chip">Azure</span>
+          <span class="chip">Google Colab</span>
+          <span class="chip">Git</span>
+          <span class="chip">Flutter</span>
+          <span class="chip">VS Code</span>
+          <span class="chip">MS Power Platform</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="section" id="contact">
+    <div class="section-head reveal">
+      <span class="section-label">Contact</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="contact-inner reveal">
+      <div class="contact-copy">
+        <p>Open to internships, research collaborations, and interesting conversations. Feel free to reach out.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:vineethrajesh383@gmail.com" class="contact-link">vineethrajesh383@gmail.com</a>
+        <a href="https://linkedin.com/in/vineethrajesh383" target="_blank" class="contact-link">linkedin.com/in/vineethrajesh383</a>
+        <a href="tel:7135840271" class="contact-link">713-584-0271</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span>© 2026 Vineeth Rajesh</span>
+    <span>Redmond, WA</span>
+  </footer>
+
+</div><!-- /wrap -->
+
+<script>
+  // Scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 60);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Show photo if it loads
+  const img = document.querySelector('.hero-photo img');
+  if (img) {
+    img.onload = () => {
+      img.style.display = 'block';
+      document.querySelector('.photo-icon').style.display = 'none';
+      document.querySelector('.photo-hint').style.display = 'none';
+    };
+    img.onerror = () => { img.style.display = 'none'; };
+  }
+</script>
+</body>
+</html>
