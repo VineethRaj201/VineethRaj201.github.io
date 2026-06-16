@@ -9,15 +9,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet"/>
 <style>
   :root {
-    --bg:      #faf9f7;
-    --surface: #f2f0ec;
-    --border:  #e0ddd8;
-    --text:    #1c1c1a;
-    --muted:   #6b6862;
-    --faint:   #b0aba4;
-    --accent:  #2d6a4f;      /* deep green — trustworthy, not loud */
-    --accent-l:#d8eedf;      /* light tint */
-    --tag-bg:  #edeae5;
+    --bg:      #f8f7f4;
+    --surface: #f0ede8;
+    --border:  #dedad4;
+    --text:    #1a1a18;
+    --muted:   #64615c;
+    --faint:   #aaa69f;
+    --accent:  #1a56db;
+    --accent-l:#dce8ff;
+    --accent-m:#3b6fd4;
+    --tag-bg:  #eae7e2;
+    --green:   #2d6a4f;
+    --green-l: #d8eedf;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,243 +38,202 @@
 
   a { color: inherit; text-decoration: none; }
 
-  /* ── LAYOUT ── */
-  .wrap {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 0 2.5rem;
+
+  .cursor-dot {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease, opacity 0.2s;
+    transform: translate(-50%, -50%);
   }
+  .cursor-ring {
+    width: 28px; height: 28px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.4;
+    transition: transform 0.18s ease, width 0.2s, height 0.2s, opacity 0.2s;
+    transform: translate(-50%, -50%);
+  }
+
+  /* ── LAYOUT ── */
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 2.5rem; }
 
   /* ── NAV ── */
   nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(250,249,247,0.88);
-    backdrop-filter: blur(10px);
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(248,247,244,0.9);
+    backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
     padding: 0.9rem 0;
   }
-  nav .wrap {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  nav .wrap { display: flex; justify-content: space-between; align-items: center; }
   .nav-name {
     font-family: 'Fraunces', serif;
-    font-size: 1.05rem;
-    font-weight: 400;
+    font-size: 1.05rem; font-weight: 400;
     letter-spacing: -0.01em;
-    color: var(--text);
   }
-  .nav-links {
-    display: flex;
-    gap: 1.75rem;
-    list-style: none;
-  }
+  .nav-links { display: flex; gap: 1.75rem; list-style: none; }
   .nav-links a {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--muted);
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
+    font-size: 0.68rem; color: var(--muted);
+    letter-spacing: 0.07em; text-transform: uppercase;
     transition: color 0.15s;
   }
   .nav-links a:hover { color: var(--accent); }
 
   /* ── HERO ── */
   #hero {
-    padding: 5rem 0 4.5rem;
+    padding: 5.5rem 0 4.5rem;
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 3rem;
     align-items: center;
     border-bottom: 1px solid var(--border);
   }
-  .hero-text {}
   .hero-eyebrow {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
+    font-size: 0.7rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent);
     margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block; width: 20px; height: 1px;
+    background: var(--accent);
   }
   #hero h1 {
     font-family: 'Fraunces', serif;
     font-weight: 300;
-    font-size: clamp(2.6rem, 5vw, 3.8rem);
-    line-height: 1.08;
-    letter-spacing: -0.03em;
-    margin-bottom: 1.2rem;
-    color: var(--text);
+    font-size: clamp(2.8rem, 5vw, 4rem);
+    line-height: 1.06; letter-spacing: -0.03em;
+    margin-bottom: 1.3rem;
   }
-  #hero h1 em {
-    font-style: italic;
-    color: var(--muted);
-  }
+  #hero h1 em { font-style: italic; color: var(--muted); }
   .hero-bio {
-    font-size: 1rem;
-    color: var(--muted);
-    max-width: 480px;
-    line-height: 1.75;
+    font-size: 1rem; color: var(--muted);
+    max-width: 480px; line-height: 1.8;
     margin-bottom: 2rem;
   }
-  .hero-links {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
+  .hero-status {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem; color: var(--green);
+    letter-spacing: 0.05em;
+    background: var(--green-l);
+    padding: 0.3rem 0.75rem; border-radius: 100px;
+    margin-bottom: 1.5rem;
   }
+  .status-dot {
+    width: 6px; height: 6px;
+    background: var(--green); border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+  .hero-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
   .pill {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.05em;
-    padding: 0.55rem 1.1rem;
-    border-radius: 100px;
-    transition: all 0.15s;
-    white-space: nowrap;
+    font-size: 0.72rem; letter-spacing: 0.05em;
+    padding: 0.55rem 1.1rem; border-radius: 100px;
+    transition: all 0.15s; white-space: nowrap;
   }
-  .pill-solid {
-    background: var(--accent);
-    color: #fff;
-  }
-  .pill-solid:hover { opacity: 0.85; }
-  .pill-outline {
-    border: 1px solid var(--border);
-    color: var(--muted);
-    background: transparent;
-  }
+  .pill-solid { background: var(--accent); color: #fff; }
+  .pill-solid:hover { background: var(--accent-m); }
+  .pill-outline { border: 1px solid var(--border); color: var(--muted); }
   .pill-outline:hover { border-color: var(--accent); color: var(--accent); }
 
-  /* Photo placeholder */
   .hero-photo {
-    width: 170px;
-    height: 170px;
-    border-radius: 12px;
+    width: 170px; height: 170px;
+    border-radius: 14px;
     background: var(--surface);
     border: 1px dashed var(--border);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    flex-shrink: 0;
-    overflow: hidden;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0.5rem; flex-shrink: 0; overflow: hidden;
   }
-  .hero-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 12px;
-    display: none; /* shown once you add an image */
-  }
+  .hero-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; display: none; }
   .photo-hint {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.6rem;
-    color: var(--faint);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    text-align: center;
-    line-height: 1.6;
-    padding: 0 0.75rem;
+    font-size: 0.6rem; color: var(--faint);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    text-align: center; line-height: 1.6; padding: 0 0.75rem;
   }
   .photo-icon { font-size: 1.75rem; opacity: 0.3; }
 
   /* ── SECTION TEMPLATE ── */
-  .section {
-    padding: 4rem 0;
-    border-bottom: 1px solid var(--border);
-  }
+  .section { padding: 4rem 0; border-bottom: 1px solid var(--border); }
   .section:last-of-type { border-bottom: none; }
   .section-head {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+    display: flex; align-items: center; gap: 1rem;
     margin-bottom: 2.5rem;
   }
   .section-label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
+    font-size: 0.65rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent);
   }
-  .section-rule {
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
+  .section-rule { flex: 1; height: 1px; background: var(--border); }
 
   /* ── ABOUT ── */
   #about p {
-    color: var(--muted);
-    max-width: 640px;
-    font-size: 0.97rem;
-    line-height: 1.8;
+    color: var(--muted); max-width: 640px;
+    font-size: 0.97rem; line-height: 1.85;
   }
 
   /* ── EXPERIENCE ── */
-  .exp-list { display: flex; flex-direction: column; gap: 0; }
+  .exp-list { display: flex; flex-direction: column; }
   .exp-item {
     display: grid;
     grid-template-columns: 148px 1fr;
     gap: 0 2rem;
     padding: 1.75rem 0;
     border-top: 1px solid var(--border);
+    transition: background 0.2s;
   }
   .exp-item:last-child { border-bottom: 1px solid var(--border); }
-  .exp-meta {
-    padding-top: 0.1rem;
-  }
   .exp-date {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--faint);
-    line-height: 1.6;
+    font-size: 0.68rem; color: var(--faint); line-height: 1.6;
+    padding-top: 0.1rem;
   }
   .exp-title {
     font-family: 'Fraunces', serif;
-    font-weight: 400;
-    font-size: 1.05rem;
-    letter-spacing: -0.01em;
-    margin-bottom: 0.15rem;
-    line-height: 1.3;
+    font-weight: 400; font-size: 1.05rem;
+    letter-spacing: -0.01em; margin-bottom: 0.15rem; line-height: 1.3;
   }
   .exp-org {
-    font-size: 0.8rem;
-    color: var(--faint);
-    margin-bottom: 0.8rem;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.04em;
+    font-size: 0.68rem; letter-spacing: 0.04em;
+    color: var(--faint); margin-bottom: 0.85rem;
   }
-  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
   .exp-bullets li {
-    font-size: 0.88rem;
-    color: var(--muted);
-    padding-left: 1rem;
-    position: relative;
-    line-height: 1.65;
+    font-size: 0.88rem; color: var(--muted);
+    padding-left: 1rem; position: relative; line-height: 1.65;
   }
   .exp-bullets li::before {
-    content: '·';
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-size: 1.1rem;
-    line-height: 1.45;
+    content: '·'; position: absolute; left: 0;
+    color: var(--accent); font-size: 1.1rem; line-height: 1.45;
   }
-  .tag-row { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.85rem; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.9rem; }
   .tag {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.04em;
-    padding: 0.2rem 0.6rem;
-    border-radius: 3px;
-    background: var(--tag-bg);
-    color: var(--muted);
+    font-size: 0.62rem; letter-spacing: 0.04em;
+    padding: 0.2rem 0.6rem; border-radius: 3px;
+    background: var(--tag-bg); color: var(--muted);
     border: 1px solid var(--border);
+    transition: border-color 0.15s, color 0.15s;
   }
+  .tag:hover { border-color: var(--accent); color: var(--accent); }
 
   /* ── PROJECTS ── */
   .project-grid {
@@ -282,186 +244,117 @@
   .project-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 1.6rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.65rem;
-    transition: box-shadow 0.18s, transform 0.18s;
+    border-radius: 10px; padding: 1.6rem;
+    display: flex; flex-direction: column; gap: 0.65rem;
+    transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
   }
   .project-card:hover {
-    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(26,86,219,0.08);
+    transform: translateY(-3px);
+    border-color: var(--accent-l);
   }
-  .project-card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
+  .project-card-top { display: flex; justify-content: space-between; align-items: flex-start; }
   .project-name {
     font-family: 'Fraunces', serif;
-    font-weight: 400;
-    font-size: 1.1rem;
-    letter-spacing: -0.01em;
-    line-height: 1.2;
+    font-weight: 400; font-size: 1.1rem;
+    letter-spacing: -0.01em; line-height: 1.2;
   }
   .project-badge {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.58rem;
-    letter-spacing: 0.08em;
+    font-size: 0.58rem; letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: 0.18rem 0.5rem;
-    border-radius: 100px;
-    background: var(--accent-l);
-    color: var(--accent);
-    white-space: nowrap;
-    margin-top: 0.1rem;
+    padding: 0.18rem 0.5rem; border-radius: 100px;
+    background: var(--accent-l); color: var(--accent);
+    white-space: nowrap; margin-top: 0.1rem;
   }
+  .project-badge.research { background: var(--green-l); color: var(--green); }
   .project-sub {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.04em;
-    color: var(--faint);
+    font-size: 0.65rem; letter-spacing: 0.04em; color: var(--faint);
   }
-  .project-desc {
-    font-size: 0.87rem;
-    color: var(--muted);
-    line-height: 1.65;
-    flex: 1;
-  }
+  .project-desc { font-size: 0.87rem; color: var(--muted); line-height: 1.65; flex: 1; }
   .project-card.placeholder {
-    background: transparent;
-    border-style: dashed;
-    align-items: center;
-    justify-content: center;
-    min-height: 160px;
-    cursor: default;
+    background: transparent; border-style: dashed;
+    align-items: center; justify-content: center;
+    min-height: 160px; cursor: default;
   }
-  .project-card.placeholder:hover { transform: none; box-shadow: none; }
+  .project-card.placeholder:hover { transform: none; box-shadow: none; border-color: var(--border); }
   .placeholder-label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--faint);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    font-size: 0.65rem; color: var(--faint);
+    letter-spacing: 0.1em; text-transform: uppercase;
   }
 
   /* ── PUBLICATION ── */
   .pub-card {
     background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
+    border: 1px solid var(--border); border-radius: 10px;
     padding: 1.75rem 2rem;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 1.5rem;
-    align-items: start;
-    transition: box-shadow 0.18s;
+    display: grid; grid-template-columns: auto 1fr;
+    gap: 1.5rem; align-items: start;
+    transition: box-shadow 0.2s, border-color 0.2s;
   }
-  .pub-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+  .pub-card:hover {
+    box-shadow: 0 6px 24px rgba(26,86,219,0.08);
+    border-color: var(--accent-l);
+  }
   .pub-icon-col {
-    width: 42px;
-    height: 42px;
-    border-radius: 8px;
+    width: 42px; height: 42px; border-radius: 8px;
     background: var(--accent-l);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    flex-shrink: 0;
-    margin-top: 0.2rem;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; flex-shrink: 0; margin-top: 0.2rem;
   }
   .pub-venue {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.4rem;
+    font-size: 0.65rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem;
   }
   .pub-title {
     font-family: 'Fraunces', serif;
-    font-weight: 400;
-    font-size: 1.05rem;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-    margin-bottom: 0.55rem;
+    font-weight: 400; font-size: 1.05rem;
+    line-height: 1.35; letter-spacing: -0.01em; margin-bottom: 0.55rem;
   }
-  .pub-authors {
-    font-size: 0.78rem;
-    color: var(--faint);
-    line-height: 1.6;
-    margin-bottom: 1rem;
-  }
+  .pub-authors { font-size: 0.78rem; color: var(--faint); line-height: 1.6; margin-bottom: 1rem; }
   .pub-link {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--accent);
-    letter-spacing: 0.04em;
-    border-bottom: 1px solid var(--accent-l);
-    padding-bottom: 1px;
+    font-size: 0.7rem; color: var(--accent); letter-spacing: 0.04em;
+    border-bottom: 1px solid var(--accent-l); padding-bottom: 1px;
     transition: border-color 0.15s;
   }
   .pub-link:hover { border-color: var(--accent); }
 
   /* ── SKILLS ── */
-  /* Tag cloud grouped by category — visual but not resume-table */
   .skills-cloud { display: flex; flex-direction: column; gap: 1.25rem; }
   .skill-group { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
   .skill-group-name {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.62rem;
-    color: var(--faint);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    min-width: 68px;
+    font-size: 0.62rem; color: var(--faint);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    white-space: nowrap; min-width: 68px;
   }
   .skill-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
   .chip {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    padding: 0.32rem 0.75rem;
-    border-radius: 100px;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    background: var(--surface);
+    font-size: 0.72rem; padding: 0.32rem 0.75rem;
+    border-radius: 100px; border: 1px solid var(--border);
+    color: var(--muted); background: var(--surface);
     letter-spacing: 0.02em;
-    transition: border-color 0.15s, color 0.15s;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
   }
   .chip:hover { border-color: var(--accent); color: var(--accent); }
-  .chip.featured {
-    background: var(--accent-l);
-    border-color: transparent;
-    color: var(--accent);
-  }
+  .chip.featured { background: var(--accent-l); border-color: transparent; color: var(--accent); }
 
   /* ── CONTACT ── */
   #contact .contact-inner {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: 2rem;
+    display: grid; grid-template-columns: 1fr auto;
+    align-items: center; gap: 2rem;
   }
-  .contact-copy p {
-    font-size: 0.97rem;
-    color: var(--muted);
-    max-width: 420px;
-    line-height: 1.75;
-  }
-  .contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    align-items: flex-end;
-  }
+  .contact-copy p { font-size: 0.97rem; color: var(--muted); max-width: 420px; line-height: 1.75; }
+  .contact-links { display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-end; }
   .contact-link {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--muted);
-    letter-spacing: 0.03em;
-    border-bottom: 1px solid transparent;
-    padding-bottom: 1px;
+    font-size: 0.72rem; color: var(--muted); letter-spacing: 0.03em;
+    border-bottom: 1px solid transparent; padding-bottom: 1px;
     transition: color 0.15s, border-color 0.15s;
   }
   .contact-link:hover { color: var(--accent); border-color: var(--accent); }
@@ -469,24 +362,18 @@
   /* ── FOOTER ── */
   footer {
     padding: 2rem 0 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; justify-content: space-between; align-items: center;
     border-top: 1px solid var(--border);
-    margin-top: 0;
   }
   footer span {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--faint);
-    letter-spacing: 0.06em;
+    font-size: 0.65rem; color: var(--faint); letter-spacing: 0.06em;
   }
 
-  /* ── SCROLL REVEAL ── */
+  /* ── REVEAL ── */
   .reveal {
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.55s ease, transform 0.55s ease;
+    opacity: 0; transform: translateY(14px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
   }
   .reveal.visible { opacity: 1; transform: none; }
 
@@ -504,10 +391,18 @@
     nav .wrap { flex-wrap: wrap; gap: 0.75rem; }
     .nav-links { gap: 1rem; }
     footer { flex-direction: column; gap: 0.4rem; text-align: center; }
+    .cursor-dot, .cursor-ring { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; }
+    .status-dot { animation: none; }
+    .cursor-dot, .cursor-ring { display: none; }
   }
 </style>
 </head>
 <body>
+
 
 <!-- NAV -->
 <nav>
@@ -529,23 +424,26 @@
   <!-- HERO -->
   <section id="hero">
     <div class="hero-text">
-      <div class="hero-eyebrow">Computer Engineering · UW · Class of 2027</div>
+      <div class="hero-eyebrow">Computer Engineering · UW Paul G. Allen School</div>
       <h1>Vineeth<br/><em>Rajesh.</em></h1>
+      <div class="hero-status">
+        <span class="status-dot"></span>
+        Open to internships · Dec 2027
+      </div>
       <p class="hero-bio">
-        Junior at the University of Washington. Currently doing undergraduate research at Seattle Children's Hospital, applying machine learning to problems in neuroscience. Looking for internships in ML, software engineering, or research.
+        Junior at UW building at the intersection of AI and the real world — from RL policies for robots to understanding what it actually takes for AI systems to reason. Also have a published paper, a hackathon app, and a genuine curiosity about hard problems.
       </p>
       <div class="hero-links">
         <a href="#contact" class="pill pill-solid">Get in touch</a>
         <a href="https://linkedin.com/in/vineethrajesh383" target="_blank" class="pill pill-outline">LinkedIn ↗</a>
-        <a href="https://github.com/" target="_blank" class="pill pill-outline">GitHub ↗</a>
+        <a href="https://github.com/VineethRaj201" target="_blank" class="pill pill-outline">GitHub ↗</a>
       </div>
     </div>
 
-    <!-- PHOTO — swap the src below with your image path, then remove display:none from the img rule in CSS -->
     <div class="hero-photo">
       <img src="photo.jpg" alt="Vineeth Rajesh"/>
       <div class="photo-icon">🪪</div>
-      <div class="photo-hint">Add photo.jpg<br/>to your folder</div>
+      <div class="photo-hint">Add photo.jpg<br/>to folder</div>
     </div>
   </section>
 
@@ -555,7 +453,7 @@
       <span class="section-label">About</span>
       <div class="section-rule"></div>
     </div>
-    <p class="reveal">I'm interested in applied machine learning — building things that work on real problems. I have a peer-reviewed publication in <em>Frontiers of Medicine</em> and like working on projects that push past what I already know. I've been doing research since high school, co-founded a startup at a hackathon, and led a 100-person robotics team. Always looking for the next interesting thing to build.</p>
+    <p class="reveal">I'm interested in applied ML — building things that work on real problems. Right now that means RL policies for low-cost wheeled robots and investigating what computational properties let AI systems actually reason and plan. I have a peer-reviewed publication in <em>Frontiers in Medicine</em>, co-founded a startup at a hackathon, and led a 100-person robotics team. I like working on things where the answer isn't obvious yet.</p>
   </div>
 
   <!-- EXPERIENCE -->
@@ -567,34 +465,46 @@
     <div class="exp-list">
 
       <div class="exp-item reveal">
-        <div class="exp-meta">
-          <div class="exp-date">Dec 2025<br/>Present</div>
-        </div>
+        <div class="exp-date">Apr 2026<br/>Present</div>
         <div>
           <div class="exp-title">Undergraduate Researcher</div>
-          <div class="exp-org">Tang Lab · Seattle Children's Hospital & UW</div>
+          <div class="exp-org">Robot Learning Lab · UW · Prof. Byron Boots</div>
           <ul class="exp-bullets">
-            <li>Built an end-to-end literature extraction pipeline querying research papers, parsing abstracts, and organizing architectures into structured datasets.</li>
-            <li>Apply LLMs to screen and rank computational architectures against theoretical properties associated with global state and awareness-like coordination mechanisms.</li>
-            <li>Evaluating ML and computational neuroscience architectures against frameworks from consciousness research.</li>
+            <li>Extending a published zero-shot drift policy (Wheeled Lab, CoRL 2025) to operate under realistic sensor noise — adding noise profiles to velocity, angular velocity, and slip angle observations to improve sim-to-real transfer.</li>
+            <li>Designing MDP components for noise-robust RL training via PPO in NVIDIA Isaac Lab across 512–1024 parallelized GPU environments, including reward shaping and domain randomization over physics parameters.</li>
+            <li>Exploring recurrent policy architectures (GRU) and temporal smoothing to reduce dependency on high-precision sensors, targeting zero-shot deployment on the HOUND platform.</li>
           </ul>
           <div class="tag-row">
-            <span class="tag">LLMs</span><span class="tag">Python</span><span class="tag">Neuroscience AI</span>
+            <span class="tag">PyTorch</span><span class="tag">NVIDIA Isaac Lab</span><span class="tag">PPO</span><span class="tag">Sim-to-Real</span><span class="tag">GRU</span><span class="tag">Weights & Biases</span>
           </div>
         </div>
       </div>
 
       <div class="exp-item reveal">
-        <div class="exp-meta">
-          <div class="exp-date">Jan 2020<br/>Jun 2024</div>
+        <div class="exp-date">Dec 2025<br/>Present</div>
+        <div>
+          <div class="exp-title">Undergraduate Researcher</div>
+          <div class="exp-org">Tang Lab · Seattle Children's Hospital & UW</div>
+          <ul class="exp-bullets">
+            <li>Deriving an original six-property mechanistic framework (P1–P6) from pattern discovery analysis across 177 ML, neuroscience, and control theory systems — investigating what computational properties enable awareness-supporting architectures.</li>
+            <li>Evaluated five frontier LLMs (GPT-5, Claude, Gemini, Llama 4, DeepSeek-R1) against the framework, finding transformer forward passes are structurally incapable of metastability regardless of scale.</li>
+            <li>Proposed a Kuramoto phase-coupling extension to the GW-RNN architecture; reproducing baseline in PyTorch/CUDA and running a four-condition ablation to isolate architectural contributions.</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag">LLMs</span><span class="tag">PyTorch</span><span class="tag">CUDA</span><span class="tag">Neuroscience AI</span><span class="tag">Python</span>
+          </div>
         </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-date">Jan 2020<br/>Jun 2024</div>
         <div>
           <div class="exp-title">Research Intern</div>
           <div class="exp-org">Burkitt Lymphoma Fund for Africa · BLFA</div>
           <ul class="exp-bullets">
-            <li>Co-first author on a peer-reviewed paper in <em>Frontiers of Medicine</em> — an open-access AI diagnostic tool for early detection of Burkitt Lymphoma.</li>
-            <li>Designed and trained a CNN to classify hematopathology slides with researchers at UW, Fred Hutch, PhenoPath, and Microsoft.</li>
-            <li>Deployed model using Microsoft Azure and Google Colab for distributed training, optimized for low-resource settings.</li>
+            <li>Co-first author on a peer-reviewed paper in <em>Frontiers in Medicine</em> — an open-access AI diagnostic tool for early detection of Burkitt Lymphoma.</li>
+            <li>Designed and trained a CNN to classify hematopathology slides in collaboration with researchers at UW, Fred Hutch, PhenoPath, and Microsoft.</li>
+            <li>Deployed model on Microsoft Azure for distributed training, optimizing for accuracy and scalability in low-resource clinical settings.</li>
           </ul>
           <div class="tag-row">
             <span class="tag">CNNs</span><span class="tag">Computer Vision</span><span class="tag">Azure</span><span class="tag">PyTorch</span>
@@ -603,9 +513,7 @@
       </div>
 
       <div class="exp-item reveal">
-        <div class="exp-meta">
-          <div class="exp-date">May 2024<br/>Apr 2025</div>
-        </div>
+        <div class="exp-date">May 2024<br/>Apr 2025</div>
         <div>
           <div class="exp-title">President, FRC Robotics Team</div>
           <div class="exp-org">Eastlake High School · FIRST Robotics Competition</div>
@@ -630,6 +538,18 @@
 
       <div class="project-card reveal">
         <div class="project-card-top">
+          <span class="project-name">Hub-Feedback CNN</span>
+          <span class="project-badge research">Research</span>
+        </div>
+        <div class="project-sub">PyTorch · Computational Neuroscience · Jan 2026</div>
+        <p class="project-desc">Custom CNN with a recurrent global state module inspired by corticothalamic feedback loops. Built an evaluation harness benchmarking robustness against feedforward baselines under noise, blur, and occlusion. Developed independently — directly motivated subsequent research at Tang Lab.</p>
+        <div class="tag-row">
+          <span class="tag">PyTorch</span><span class="tag">CNNs</span><span class="tag">Global Workspace Theory</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-card-top">
           <span class="project-name">Tag!</span>
           <span class="project-badge">Active</span>
         </div>
@@ -638,11 +558,6 @@
         <div class="tag-row">
           <span class="tag">Flutter</span><span class="tag">JavaScript</span><span class="tag">C++</span><span class="tag">12Labs API</span>
         </div>
-      </div>
-
-      <!-- Duplicate this card block when you have a new project -->
-      <div class="project-card placeholder reveal">
-        <span class="placeholder-label">More coming soon</span>
       </div>
 
     </div>
@@ -676,8 +591,8 @@
         <span class="skill-group-name">Languages</span>
         <div class="skill-chips">
           <span class="chip featured">Python</span>
-          <span class="chip featured">JavaScript</span>
           <span class="chip featured">C++</span>
+          <span class="chip featured">JavaScript</span>
           <span class="chip">Java</span>
           <span class="chip">Dart</span>
         </div>
@@ -686,6 +601,7 @@
         <span class="skill-group-name">ML / AI</span>
         <div class="skill-chips">
           <span class="chip featured">PyTorch</span>
+          <span class="chip featured">Reinforcement Learning</span>
           <span class="chip featured">CNNs</span>
           <span class="chip featured">LLMs</span>
           <span class="chip">TensorFlow</span>
@@ -696,11 +612,22 @@
         </div>
       </div>
       <div class="skill-group">
+        <span class="skill-group-name">Robotics</span>
+        <div class="skill-chips">
+          <span class="chip featured">NVIDIA Isaac Lab</span>
+          <span class="chip">Sim-to-Real</span>
+          <span class="chip">Domain Randomization</span>
+          <span class="chip">PPO</span>
+          <span class="chip">ROS</span>
+        </div>
+      </div>
+      <div class="skill-group">
         <span class="skill-group-name">Tools</span>
         <div class="skill-chips">
           <span class="chip">Azure</span>
-          <span class="chip">Google Colab</span>
+          <span class="chip">Weights & Biases</span>
           <span class="chip">Git</span>
+          <span class="chip">Google Colab</span>
           <span class="chip">Flutter</span>
           <span class="chip">VS Code</span>
           <span class="chip">MS Power Platform</span>
@@ -722,7 +649,7 @@
       <div class="contact-links">
         <a href="mailto:vineethrajesh383@gmail.com" class="contact-link">vineethrajesh383@gmail.com</a>
         <a href="https://linkedin.com/in/vineethrajesh383" target="_blank" class="contact-link">linkedin.com/in/vineethrajesh383</a>
-        <a href="tel:7135840271" class="contact-link">713-584-0271</a>
+        <a href="https://github.com/VineethRaj201" target="_blank" class="contact-link">github.com/VineethRaj201</a>
       </div>
     </div>
   </div>
@@ -732,21 +659,21 @@
     <span>Redmond, WA</span>
   </footer>
 
-</div><!-- /wrap -->
+</div>
 
 <script>
   // Scroll reveal
   const io = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => {
       if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 60);
+        setTimeout(() => e.target.classList.add('visible'), i * 55);
         io.unobserve(e.target);
       }
     });
-  }, { threshold: 0.08 });
+  }, { threshold: 0.07 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // Show photo if it loads
+  // Photo fallback
   const img = document.querySelector('.hero-photo img');
   if (img) {
     img.onload = () => {
