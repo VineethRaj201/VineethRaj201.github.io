@@ -3,418 +3,484 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Vineeth Rajesh — ML/AI Research</title>
-<meta name="description" content="Computer engineering at the University of Washington. Research in computational neuroscience, robot learning, and computer vision."/>
+<title>Vineeth Rajesh</title>
+<meta name="description" content="Computer engineering at the University of Washington. Research in robot learning and computational neuroscience."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Public+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..600;1,8..60,300..500&display=swap" rel="stylesheet"/>
 <style>
   :root{
-    --paper:#eaecee;
-    --surface:#f4f5f6;
-    --line:#d5d9dd;
-    --line-soft:#e0e4e7;
-    --ink:#13161a;
-    --muted:#565d66;
-    --faint:#939aa3;
-    --signal:#0d6e68;
-    --signal-soft:#d3e5e3;
-    --signal-deep:#08514d;
+    --paper:#edf0ef;
+    --surface:#f6f8f7;
+    --line:#d3dad8;
+    --ink:#14191b;
+    --muted:#55606a;
+    --faint:#8b959d;
+    --teal:#0f6b66;
+    --teal-soft:#d4e6e2;
+    --graphite:#9aa4a8;
 
-    --display:'Newsreader',Georgia,serif;
-    --body:'Public Sans',system-ui,sans-serif;
-    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --serif:'Source Serif 4',Georgia,serif;
+    --sans:'Instrument Sans',system-ui,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --paper:#121618;
+      --surface:#181e20;
+      --line:#2a3335;
+      --ink:#e6ebea;
+      --muted:#a3adb1;
+      --faint:#6f7a7f;
+      --teal:#4fb3aa;
+      --teal-soft:#1d3634;
+      --graphite:#4a5558;
+    }
   }
 
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-
   body{
-    background:var(--paper);
-    color:var(--ink);
-    font-family:var(--body);
-    font-weight:300;
-    font-size:15px;
-    line-height:1.7;
+    background:var(--paper);color:var(--ink);
+    font-family:var(--serif);font-size:17px;line-height:1.65;font-weight:400;
     -webkit-font-smoothing:antialiased;
   }
-  a{color:inherit;text-decoration:none}
-  :focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:2px}
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:2px}
+  .wrap{max-width:980px;margin:0 auto;padding:0 2rem}
 
-  .wrap{max-width:940px;margin:0 auto;padding:0 2.5rem}
+  /* nav */
+  .nav{border-bottom:1px solid var(--line)}
+  .nav .wrap{display:flex;justify-content:space-between;align-items:center;height:60px}
+  .nav-name{font-family:var(--sans);font-weight:600;font-size:.95rem;text-decoration:none}
+  .nav ul{display:flex;gap:1.5rem;list-style:none}
+  .nav ul a{font-family:var(--sans);font-size:.88rem;color:var(--muted);text-decoration:none}
+  .nav ul a:hover{color:var(--teal)}
 
-  /* ── nav ── */
-  .site-nav{
-    position:sticky;top:0;z-index:50;
-    background:color-mix(in srgb,var(--paper) 88%,transparent);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);
-  }
-  .site-nav .wrap{display:flex;justify-content:space-between;align-items:center;height:56px}
-  .nav-mark{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
-  .nav-mark b{font-weight:500}
-  .nav-links{display:flex;gap:1.6rem;list-style:none}
-  .nav-links a{
-    font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;
-    text-transform:uppercase;color:var(--muted);
-    padding-bottom:2px;border-bottom:1px solid transparent;
-    transition:color .15s,border-color .15s;
-  }
-  .nav-links a:hover{color:var(--signal);border-color:var(--signal)}
+  /* hero */
+  .hero{display:grid;grid-template-columns:1.05fr 1fr;gap:3rem;align-items:center;padding:4.5rem 0 4rem;border-bottom:1px solid var(--line)}
+  .hero h1{font-weight:300;font-size:clamp(2.8rem,6vw,4.3rem);line-height:1;letter-spacing:-.03em;margin-bottom:1.5rem;font-variation-settings:"opsz" 60}
+  .intro{color:var(--muted);font-size:1.08rem;max-width:30em;margin-bottom:1.6rem}
+  .intro strong{color:var(--ink);font-weight:500}
+  .avail{font-family:var(--sans);font-size:.88rem;color:var(--teal);display:flex;align-items:center;gap:.55rem;margin-bottom:1.4rem}
+  .avail::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--teal)}
+  .links{display:flex;gap:1.25rem;flex-wrap:wrap;font-family:var(--sans);font-size:.92rem}
+  .links a{text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:1px}
+  .links a:hover{border-color:var(--teal);color:var(--teal)}
 
-  /* ── hero ── */
-  .hero{
-    padding:5.5rem 0 4.5rem;border-bottom:1px solid var(--line);
-  }
-  .eyebrow{
-    font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;
-    text-transform:uppercase;color:var(--signal);margin-bottom:1.1rem;
-  }
-  .hero h1{
-    font-family:var(--display);font-weight:300;
-    font-size:clamp(3rem,6vw,4.4rem);line-height:1;letter-spacing:-.025em;
-    margin-bottom:1.4rem;
-  }
-  .hero h1 i{font-style:italic;color:var(--signal-deep)}
-  .lede{font-size:1.02rem;color:var(--muted);max-width:34em;line-height:1.75;margin-bottom:1.8rem}
-  .lede em{font-family:var(--display);font-style:italic;color:var(--ink)}
+  .drift figure{margin:0}
+  .drift svg{width:100%;height:auto;display:block}
+  .drift figcaption{font-family:var(--sans);font-size:.8rem;color:var(--faint);line-height:1.5;margin-top:.6rem;max-width:34em}
+  .track{fill:none;stroke:var(--graphite);stroke-width:1.2;stroke-dasharray:2 5}
+  .path{fill:none;stroke:var(--teal);stroke-width:2;stroke-linecap:round}
+  .car rect{fill:var(--ink)}
+  .car .nose{fill:var(--teal)}
+  .vel{stroke:var(--teal);stroke-width:1.3}
+  .vel-head{fill:var(--teal)}
+  .slip-label{font-family:var(--sans);font-size:11px;fill:var(--muted)}
 
-  .status{
-    display:inline-flex;align-items:center;gap:.5rem;
-    font-family:var(--mono);font-size:.68rem;letter-spacing:.05em;
-    color:var(--signal-deep);background:var(--signal-soft);
-    padding:.32rem .8rem;border-radius:2px;margin-bottom:1.6rem;
-  }
-  .status i{width:5px;height:5px;background:var(--signal);border-radius:50%;animation:blip 2.4s ease-in-out infinite}
-  @keyframes blip{0%,100%{opacity:1}50%{opacity:.25}}
+  /* now */
+  .now{display:grid;grid-template-columns:160px 1fr;gap:2rem;padding:2.5rem 0;border-bottom:1px solid var(--line)}
+  .now h2{font-size:1.15rem;font-weight:500}
+  .now .when{font-family:var(--sans);font-size:.8rem;color:var(--faint);margin-top:.15rem}
+  .now ul{list-style:none;display:grid;gap:.5rem}
+  .now li{color:var(--muted);padding-left:1.1rem;position:relative}
+  .now li::before{content:"";position:absolute;left:0;top:.75em;width:6px;height:1px;background:var(--teal)}
 
-  .hero-links{display:flex;gap:.5rem;flex-wrap:wrap}
-  .btn{
-    font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;
-    padding:.5rem 1rem;border-radius:2px;border:1px solid transparent;
-    transition:background .15s,border-color .15s,color .15s;
-  }
-  .btn-fill{background:var(--signal);color:#fff}
-  .btn-fill:hover{background:var(--signal-deep)}
-  .btn-line{border-color:var(--line);color:var(--muted)}
-  .btn-line:hover{border-color:var(--signal);color:var(--signal)}
+  /* sections */
+  section{padding:3.5rem 0;border-bottom:1px solid var(--line)}
+  section > h2{font-weight:400;font-size:1.9rem;letter-spacing:-.02em;margin-bottom:2rem;font-variation-settings:"opsz" 40}
 
-  /* ── sections ── */
-  .block{padding:3.75rem 0;border-bottom:1px solid var(--line)}
-  .block:last-of-type{border-bottom:none}
-  .block-head{display:flex;align-items:center;gap:1rem;margin-bottom:2.25rem}
-  .block-head span{
-    font-family:var(--mono);font-size:.65rem;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--signal);
-  }
-  .block-head hr{flex:1;height:1px;border:0;background:var(--line)}
+  .entry{display:grid;grid-template-columns:160px 1fr;gap:2rem;padding:1.8rem 0;border-top:1px solid var(--line)}
+  .entry:first-of-type{border-top:none;padding-top:0}
+  .when{font-family:var(--sans);font-size:.84rem;color:var(--faint);line-height:1.5}
+  .entry h3{font-weight:500;font-size:1.2rem;line-height:1.3}
+  .org{font-family:var(--sans);font-size:.88rem;color:var(--muted);margin:.25rem 0 .9rem}
+  .question{font-style:italic;font-size:1.08rem;color:var(--ink);margin-bottom:.8rem;max-width:34em}
+  .entry ul{list-style:none;display:grid;gap:.5rem;max-width:40em}
+  .entry li{font-size:.97rem;color:var(--muted);padding-left:1.1rem;position:relative}
+  .entry li::before{content:"";position:absolute;left:0;top:.78em;width:6px;height:1px;background:var(--teal)}
+  .entry li b{font-weight:500;color:var(--ink)}
+  .stack{font-family:var(--sans);font-size:.82rem;color:var(--faint);margin-top:.9rem}
 
-  .prose{color:var(--muted);max-width:36em;font-size:.98rem;line-height:1.85}
-  .prose + .prose{margin-top:.9rem}
-  .prose em{font-family:var(--display);font-style:italic;color:var(--ink)}
+  .entry.small h3{font-size:1.05rem}
+  .entry.small .org{margin-bottom:.4rem}
 
-  /* ── roles ── */
-  .role{
-    display:grid;grid-template-columns:130px 1fr;gap:0 2.25rem;
-    padding:1.75rem 0;border-top:1px solid var(--line-soft);
-  }
-  .role:first-child{border-top:none;padding-top:0}
-  .role-when{font-family:var(--mono);font-size:.66rem;color:var(--faint);line-height:1.7;padding-top:.3rem}
-  .role-when b{display:block;color:var(--muted);font-weight:400}
-  .role-title{font-family:var(--display);font-weight:400;font-size:1.18rem;letter-spacing:-.01em;line-height:1.3}
-  .role-org{font-family:var(--mono);font-size:.66rem;letter-spacing:.04em;color:var(--faint);margin:.2rem 0 .85rem}
-  .role ul{list-style:none;display:flex;flex-direction:column;gap:.45rem}
-  .role li{font-size:.89rem;color:var(--muted);line-height:1.7;padding-left:1.1rem;position:relative}
-  .role li::before{content:'';position:absolute;left:0;top:.72em;width:5px;height:1px;background:var(--signal)}
-  .role li em{font-style:italic}
-  .role li b{font-weight:500;color:var(--ink)}
+  /* projects */
+  .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+  .proj{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:1.4rem 1.5rem 1.5rem;display:flex;flex-direction:column}
+  .proj svg{width:100%;height:auto;margin-bottom:1.1rem;border-bottom:1px solid var(--line);padding-bottom:1rem}
+  .proj h3{font-weight:500;font-size:1.15rem}
+  .proj .org{margin:.15rem 0 .7rem}
+  .proj p{font-size:.95rem;color:var(--muted);flex:1}
+  .proj a.more{font-family:var(--sans);font-size:.85rem;color:var(--teal);margin-top:.9rem;text-decoration:none}
+  .proj a.more:hover{text-decoration:underline}
+  .proj.wide{grid-column:1 / -1}
+  .fig-line{fill:none;stroke:var(--ink);stroke-width:1.3}
+  .fig-accent{fill:none;stroke:var(--teal);stroke-width:1.6}
+  .fig-fill{fill:var(--teal-soft);stroke:var(--teal);stroke-width:1.3}
+  .fig-text{font-family:var(--sans);font-size:11px;fill:var(--muted)}
 
-  .tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.95rem}
-  .tags span{
-    font-family:var(--mono);font-size:.62rem;letter-spacing:.03em;
-    padding:.18rem .55rem;border:1px solid var(--line);
-    color:var(--muted);background:var(--surface);border-radius:2px;
-  }
+  /* publication */
+  .pub{max-width:44em}
+  .pub h3{font-weight:400;font-size:1.3rem;line-height:1.35;margin-bottom:.6rem}
+  .pub p{color:var(--muted);font-size:.95rem}
+  .pub p u{text-decoration:none;color:var(--ink);font-weight:500}
+  .pub a{font-family:var(--sans);font-size:.9rem;color:var(--teal);display:inline-block;margin-top:.8rem}
 
-  /* ── work ── */
-  .work{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
-  .card{
-    background:var(--surface);border:1px solid var(--line);border-radius:4px;
-    padding:1.5rem;display:flex;flex-direction:column;gap:.55rem;
-    transition:border-color .2s,transform .2s;
-  }
-  .card:hover{border-color:var(--signal);transform:translateY(-2px)}
-  .card-top{display:flex;justify-content:space-between;align-items:baseline;gap:.75rem}
-  .card-name{font-family:var(--display);font-weight:400;font-size:1.12rem;letter-spacing:-.01em}
-  .card-kind{font-family:var(--mono);font-size:.58rem;letter-spacing:.09em;text-transform:uppercase;color:var(--signal);white-space:nowrap}
-  .card-meta{font-family:var(--mono);font-size:.63rem;letter-spacing:.03em;color:var(--faint)}
-  .card p{font-size:.87rem;color:var(--muted);line-height:1.7;flex:1}
+  /* toolkit */
+  .kit{display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem 2rem}
+  .kit h3{font-family:var(--sans);font-size:.88rem;font-weight:600;margin-bottom:.4rem}
+  .kit p{font-size:.95rem;color:var(--muted)}
 
-  /* ── publication ── */
-  .pub{background:var(--surface);border:1px solid var(--line);border-left:2px solid var(--signal);border-radius:4px;padding:1.6rem 1.9rem}
-  .pub-venue{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--signal);margin-bottom:.5rem}
-  .pub-title{font-family:var(--display);font-weight:400;font-size:1.15rem;line-height:1.4;letter-spacing:-.01em;margin-bottom:.6rem}
-  .pub-authors{font-size:.79rem;color:var(--faint);line-height:1.7;margin-bottom:.9rem}
-  .pub-authors u{text-decoration:none;color:var(--muted);font-weight:400}
-  .pub a{font-family:var(--mono);font-size:.68rem;color:var(--signal);border-bottom:1px solid var(--signal-soft);padding-bottom:1px;transition:border-color .15s}
-  .pub a:hover{border-color:var(--signal)}
+  /* contact */
+  .contact p{color:var(--muted);max-width:32em;margin-bottom:1.2rem}
 
-  /* ── skills ── */
-  .kit{display:flex;flex-direction:column;gap:1.1rem}
-  .kit-row{display:grid;grid-template-columns:88px 1fr;gap:1rem;align-items:baseline}
-  .kit-row dt{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
-  .kit-row dd{display:flex;flex-wrap:wrap;gap:.35rem}
-  .kit-row dd span{
-    font-family:var(--mono);font-size:.71rem;padding:.26rem .65rem;
-    border:1px solid var(--line);border-radius:2px;color:var(--muted);background:var(--surface);
-  }
-  .kit-row dd span.key{background:var(--signal-soft);border-color:transparent;color:var(--signal-deep)}
-
-  /* ── contact ── */
-  .contact{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center}
-  .contact ul{list-style:none;display:flex;flex-direction:column;gap:.4rem;align-items:flex-end}
-  .contact a{font-family:var(--mono);font-size:.71rem;color:var(--muted);border-bottom:1px solid transparent;padding-bottom:1px;transition:color .15s,border-color .15s}
-  .contact a:hover{color:var(--signal);border-color:var(--signal)}
-
-  footer{padding:1.75rem 0 2.75rem;display:flex;justify-content:space-between;border-top:1px solid var(--line)}
-  footer span{font-family:var(--mono);font-size:.63rem;color:var(--faint);letter-spacing:.06em}
-
-  /* ── reveal ── */
-  .rev{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
-  .rev.on{opacity:1;transform:none}
+  footer{padding:1.5rem 0 2.5rem;display:flex;justify-content:space-between;font-family:var(--sans);font-size:.8rem;color:var(--faint)}
 
   @media (max-width:760px){
-    .wrap{padding:0 1.25rem}
-    .hero{grid-template-columns:1fr;gap:2.5rem;padding:3.25rem 0 2.75rem}
-    .role{grid-template-columns:1fr;gap:.55rem}
-    .role-when{padding-top:0}
-    .role-when b{display:inline}
-    .work{grid-template-columns:1fr}
-    .kit-row{grid-template-columns:1fr;gap:.45rem}
-    .contact{grid-template-columns:1fr}
-    .contact ul{align-items:flex-start}
-    .nav-links{gap:.9rem}
-    .nav-links li:nth-child(n+4){display:none}
+    body{font-size:16px}
+    .wrap{padding:0 1rem}
+    .nav ul{gap:1rem}
+    .nav ul li:nth-child(n+4){display:none}
+    .hero{grid-template-columns:1fr;gap:2.25rem;padding:3rem 0 2.75rem}
+    .now,.entry{grid-template-columns:1fr;gap:.4rem}
+    .projects{grid-template-columns:1fr}
+    .kit{grid-template-columns:1fr 1fr}
     footer{flex-direction:column;gap:.3rem}
   }
-
-  @media (prefers-reduced-motion:reduce){
-    html{scroll-behavior:auto}
-    .rev{opacity:1;transform:none;transition:none}
-    .status i{animation:none}
-    .card:hover{transform:none}
-  }
+  @media (max-width:440px){ .kit{grid-template-columns:1fr} }
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
 </style>
 </head>
 <body>
 
-<nav class="site-nav">
+<nav class="nav">
   <div class="wrap">
-    <span class="nav-mark"><b>Vineeth Rajesh</b></span>
-    <ul class="nav-links">
+    <a class="nav-name" href="#">Vineeth Rajesh</a>
+    <ul>
       <li><a href="#research">Research</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#paper">Paper</a></li>
-      <li><a href="#kit">Toolkit</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#publication">Publication</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
 </nav>
 
-<div class="wrap">
+<main class="wrap">
 
-  <!-- HERO -->
   <header class="hero">
     <div>
-      <p class="eyebrow">Computer Engineering · University of Washington</p>
-      <h1>Vineeth <i>Rajesh</i></h1>
-      <p class="lede">
-        I'm drawn to problems where the right approach isn't settled yet. That's kept me in
-        ML and AI research — and it's where I want to stay: building systems that have to
-        hold up outside a benchmark, on questions that don't have an answer yet.
+      <h1>Vineeth Rajesh</h1>
+      <p class="intro">
+        I study computer engineering at the <strong>University of Washington</strong>. I do research in
+        robot learning at UW's Robot Learning Lab and in computational neuroscience at Seattle Children's.
       </p>
-      <div class="status"><i></i> Open to Summer 2027 internships</div>
-      <div class="hero-links">
-        <a class="btn btn-fill" href="#contact">Get in touch</a>
-        <a class="btn btn-line" href="https://linkedin.com/in/vineethrajesh383" target="_blank" rel="noopener">LinkedIn ↗</a>
-        <a class="btn btn-line" href="https://github.com/VineethRaj201" target="_blank" rel="noopener">GitHub ↗</a>
+      <p class="avail">Looking for summer 2027 internships</p>
+      <div class="links">
+        <a href="mailto:vineethrajesh383@gmail.com">Email</a>
+        <a href="https://github.com/VineethRaj201" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/in/vineethrajesh383" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </div>
 
+    <div class="drift">
+      <figure>
+        <svg id="drift" viewBox="0 0 440 340" role="img" aria-labelledby="driftTitle">
+          <title id="driftTitle">A car drifting through a turn, with its heading rotated away from its direction of travel</title>
+          <path class="track" d="M20 300 C 140 300, 230 300, 300 250 S 400 120, 330 50"/>
+          <path id="driftPath" class="path" d="M20 300 C 140 300, 230 300, 300 250 S 400 120, 330 50"/>
+          <g id="cars"></g>
+        </svg>
+        <figcaption>A car sliding through a turn. Each body points one way while the line shows where it's actually moving; the gap between them is the slip angle my drift policies learn to hold.</figcaption>
+      </figure>
+    </div>
   </header>
 
-  <!-- RESEARCH -->
-  <section class="block" id="research">
-    <div class="block-head rev"><span>Research &amp; Experience</span><hr/></div>
+  <div class="now">
+    <div>
+      <h2>Right now</h2>
+      <p class="when">November 2026</p>
+    </div>
+    <ul>
+      <li>Training drift policies in Isaac Lab that adapt to surface friction, and getting the real car ready with swappable 3D-printed treads.</li>
+      <li>Writing up the Tang Lab manuscript as first author.</li>
+      <li>Building a pose-estimation tool that clinicians at Seattle Children's can run themselves.</li>
+      <li>Applying for summer 2027 internships in ML research and engineering.</li>
+    </ul>
+  </div>
 
-    <article class="role rev">
-      <div class="role-when">Dec 2025<b>Present</b></div>
+  <section id="research">
+    <h2>Research</h2>
+
+    <article class="entry">
+      <p class="when">Jun 2026 – Present</p>
       <div>
-        <h3 class="role-title">Undergraduate Researcher</h3>
-        <p class="role-org">Tang Lab · Seattle Children's Research Institute &amp; UW</p>
+        <h3>Robot Learning Lab, University of Washington</h3>
+        <p class="org">Undergraduate Researcher · Advisor: Prof. Byron Boots · Mentor: Tyler Han</p>
+        <p class="question">Can a low-cost RC car learn to drift on a surface it hasn't felt before?</p>
         <ul>
-          <li>Analyzed a 4,694-concept × 80-brain-region mapping matrix derived from probing ~50 language models, using PCA and hierarchical clustering to identify awareness as a single dominant latent dimension (<b>R² = 0.847</b>, 67.9% variance).</li>
-          <li>Designed a prediction-error experiment adapting the clinical local–global oddball paradigm; a recurrent observer detected sequence-level violations at <b>97.6%</b> with 100% selectivity, which a memoryless baseline cannot do at all.</li>
-          <li>Built a two-workspace cognitive architecture — a semantic content workspace feeding a persistent observer workspace — reaching goals <b>58%</b> of the time against a 28% random baseline in a closed perception–action loop.</li>
-          <li>Extended Global Workspace RNNs in PyTorch with recurrent observer modules, quantifying emergent dynamics (entropy rate, mutual-information coupling) across training. Contributing toward a peer-reviewed publication.</li>
+          <li>Developing a reinforcement learning drift policy that adapts to varying surface friction, trained with PPO in NVIDIA Isaac Lab across <b>1,024 parallel environments</b> with domain randomization over friction, mass, and actuator dynamics.</li>
+          <li>Investigating recurrent actor-critic architectures that infer friction online from state-action history, paired with an asymmetric critic trained on noise-free privileged observations.</li>
+          <li>Exploring LLM-guided reward and domain-randomization design (Eureka/DrEureka), with fitness defined as drift performance across friction conditions.</li>
+          <li>Built an evaluation pipeline around drift metrics (slip angle, drift ratio, spinout rate) and found that metrics computed from noise-corrupted observations inflated drift ratio from <b>~37% to 50%</b>.</li>
+          <li>Preparing real-world validation with 3D-printed interchangeable-tread wheels to vary friction on the physical car.</li>
         </ul>
-        <div class="tags"><span>PyTorch</span><span>CUDA</span><span>LLMs</span><span>Recurrent Architectures</span><span>Experimental Design</span></div>
+        <p class="stack">Isaac Lab · PPO · RSL-RL · GRU · Domain randomization · Sim-to-real</p>
       </div>
     </article>
 
-    <article class="role rev">
-      <div class="role-when">Jun 2026<b>Present</b></div>
+    <article class="entry">
+      <p class="when">Dec 2025 – Present</p>
       <div>
-        <h3 class="role-title">Data Science Intern</h3>
-        <p class="role-org">SCOUT Program · Seattle Children's IT-CARES</p>
+        <h3>Tang Lab, Seattle Children's Research Institute &amp; UW</h3>
+        <p class="org">Undergraduate Researcher · Computational Neuroscience &amp; AI</p>
+        <p class="question">What computational properties does a system need to support awareness, and which ones do today's models have?</p>
         <ul>
-          <li>Building a computer vision application that turns physical therapy video — drop vertical jumps, treadmill running — into objective biomechanical measurements clinicians use for return-to-play decisions.</li>
-          <li>Developing a modular backend that ingests video, runs frame-by-frame pose estimation with MediaPipe, computes joint angles and other movement metrics, and renders an annotated overlay.</li>
-          <li>Designing the clinician-facing interface in Gradio so non-technical staff can upload and review analyses without touching code.</li>
+          <li>First author on a manuscript in preparation for <i>Nature Machine Intelligence</i>, mapping <b>4,694 concepts onto 80 brain regions</b> across ~50 language models.</li>
+          <li>Built the reproducible six-stage pipeline behind the paper's central figure; showed that five dominant theories of consciousness collapse onto a single latent factor (<b>R² = 0.85</b>, 68% of variance) and ranked the mechanistic properties all of them under-represent.</li>
+          <li>Designed a nine-control experimental battery testing whether language models hold a distinct self-representation, establishing a well-controlled null, including 1,000-permutation tests showing the apparent effect wasn't specific to self-related vocabulary.</li>
         </ul>
-        <div class="tags"><span>Python</span><span>MediaPipe</span><span>Pose Estimation</span><span>Gradio</span><span>Data Pipelines</span></div>
-      </div>
-    </article>
-
-    <article class="role rev">
-      <div class="role-when">Apr 2026<b>Present</b></div>
-      <div>
-        <h3 class="role-title">Undergraduate Researcher</h3>
-        <p class="role-org">Robot Learning Lab · UW · Prof. Byron Boots</p>
-        <ul>
-          <li>Extending a published zero-shot drift policy (Wheeled Lab, CoRL 2025) to hold up under realistic sensor noise, adding noise profiles to velocity, angular velocity, and slip angle observations to find which state estimates degrade transfer most.</li>
-          <li>Designing MDP components for noise-robust PPO training in NVIDIA Isaac Lab — observation space, reward shaping, and domain randomization over friction, mass, and inertia across 512–1024 parallel GPU environments.</li>
-          <li>Exploring recurrent policies (GRU) and temporal smoothing to cut dependence on high-precision sensors, targeting zero-shot deployment on the HOUND platform.</li>
-        </ul>
-        <div class="tags"><span>NVIDIA Isaac Lab</span><span>PPO</span><span>Sim-to-Real</span><span>GRU</span><span>Domain Randomization</span></div>
-      </div>
-    </article>
-
-    <article class="role rev">
-      <div class="role-when">Jan 2020<b>Jun 2024</b></div>
-      <div>
-        <h3 class="role-title">Research Intern</h3>
-        <p class="role-org">Burkitt Lymphoma Fund for Africa</p>
-        <ul>
-          <li>Co-first author on a peer-reviewed paper in <em>Frontiers in Medicine</em> — an open-access AI tool for early diagnosis of Burkitt Lymphoma, an aggressive pediatric cancer.</li>
-          <li>Designed and trained a CNN to classify hematopathology slides, working with researchers at UW, Fred Hutch, PhenoPath, and Microsoft.</li>
-          <li>Deployed on Microsoft Azure for distributed training, tuned for diagnostic accuracy and scalability in low-resource clinical settings.</li>
-        </ul>
-        <div class="tags"><span>CNNs</span><span>Computer Vision</span><span>Microsoft Azure</span><span>Medical Imaging</span></div>
-      </div>
-    </article>
-
-    <article class="role rev">
-      <div class="role-when">May 2024<b>Apr 2025</b></div>
-      <div>
-        <h3 class="role-title">President, FRC Robotics Team</h3>
-        <p class="role-org">Pack of Parts · FIRST Robotics Competition 1294</p>
-        <ul>
-          <li>Led a 100+ member team across engineering, business, and outreach; oversaw the full build lifecycle from CAD to competition.</li>
-          <li>Raised over $50,000 in a season through sponsorships, grants, and community fundraising.</li>
-          <li>Ran robotics summer camps for nearly 200 students.</li>
-        </ul>
+        <p class="stack">PyTorch · CUDA · PCA · Permutation testing · LLMs</p>
       </div>
     </article>
   </section>
 
-  <!-- WORK -->
-  <section class="block" id="work">
-    <div class="block-head rev"><span>Selected Work</span><hr/></div>
-    <div class="work">
-      <a class="card rev" href="https://github.com/VineethRaj201/hub-feedback-cnn" target="_blank" rel="noopener">
-        <div class="card-top">
-          <h3 class="card-name">Hub-Feedback CNN</h3>
-          <span class="card-kind">Research</span>
-        </div>
-        <p class="card-meta">PyTorch · Jan 2026</p>
-        <p>A CNN with a recurrent global state module modeled on corticothalamic feedback loops, plus an evaluation harness benchmarking robustness against feedforward baselines under noise, blur, and occlusion. Built independently — it's what led me to the questions I now work on at Tang Lab.</p>
-      </a>
+  <section id="experience">
+    <h2>Experience</h2>
 
-      <a class="card rev" href="https://github.com/VineethRaj201" target="_blank" rel="noopener">
-        <div class="card-top">
-          <h3 class="card-name">Tag!</h3>
-          <span class="card-kind">DubHacks 2025</span>
-        </div>
-        <p class="card-meta">Flutter · Dart · JavaScript</p>
-        <p>A gamified skill-learning social app with video posting, user tagging, and difficulty-based progression. Integrated the 12Labs multimodal API to verify uploaded video against skill captions, and presented the architecture at a 12Labs webinar to their Head of Developer Experience.</p>
-      </a>
+    <article class="entry">
+      <p class="when">Jun 2026 – Present</p>
+      <div>
+        <h3>SCOUT Program, Seattle Children's IT-CARES</h3>
+        <p class="org">Data Science Intern</p>
+        <p class="question">Turning ordinary physical therapy video into measurements clinicians can use.</p>
+        <ul>
+          <li>Building a Python/Gradio computer vision app that uses MediaPipe pose estimation to extract biomechanical metrics (joint angles, knee flexion) from videos of athletes doing drop vertical jumps and treadmill running.</li>
+          <li>Developing a modular backend that ingests video, runs frame-by-frame skeletal analysis, computes movement metrics, and renders an annotated overlay for review.</li>
+          <li>Designing a clinician-facing interface so non-technical staff can upload videos and review results to support return-to-play decisions.</li>
+        </ul>
+        <p class="stack">Python · MediaPipe · Gradio · OpenCV</p>
+      </div>
+    </article>
+
+    <article class="entry">
+      <p class="when">Jun – Sep 2026</p>
+      <div>
+        <h3>Flipside Capital</h3>
+        <p class="org">Software Engineering Intern, Trading Systems · Family office</p>
+        <ul>
+          <li>Built a momentum-based swing trading system in Python on the Alpaca API that classifies market regime and scores entries on moving-average structure, price relative to VWAP, and gap detection.</li>
+          <li>Backtested over 24 months of historical data: <b>Sharpe 1.8</b>, 67% win rate, 6.3% average return per trade.</li>
+          <li>Modeled dealer gamma exposure across SPX strikes to flag gamma-squeeze setups near expiration, and deployed the scorer as a real-time scanner ranking setups during market hours.</li>
+        </ul>
+        <p class="stack">Python · Alpaca API · Options Greeks · Backtesting</p>
+      </div>
+    </article>
+
+    <article class="entry">
+      <p class="when">Jan 2020 – Jun 2024</p>
+      <div>
+        <h3>Burkitt Lymphoma Fund for Africa</h3>
+        <p class="org">Research Intern · AI for Global Health</p>
+        <ul>
+          <li>Co-first author on a peer-reviewed paper in <i>Frontiers in Medicine</i>: an open-access AI tool for early diagnosis of Burkitt Lymphoma, an aggressive pediatric cancer.</li>
+          <li>Designed and trained a CNN to classify hematopathology slides with researchers at UW, Fred Hutch, PhenoPath, and Microsoft, using distributed training on Azure.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="entry small">
+      <p class="when">May 2024 – Apr 2025</p>
+      <div>
+        <h3>President, FIRST Robotics Team 1294</h3>
+        <p class="org">Led a 100+ member team, raised $50K+ in a season, and ran summer camps for ~200 students.</p>
+      </div>
+    </article>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects">
+
+      <article class="proj wide">
+        <svg viewBox="0 0 660 130" aria-hidden="true">
+          <path class="fig-line" d="M24 30 h118 a6 6 0 0 1 6 6 v24 a6 6 0 0 1 -6 6 h-88 l-12 10 v-10 h-18 a6 6 0 0 1 -6 -6 v-24 a6 6 0 0 1 6 -6 z"/>
+          <path class="fig-line" d="M40 40 H128 M40 52 H108"/>
+          <path class="fig-line" d="M40 80 h100 a6 6 0 0 1 6 6 v16 a6 6 0 0 1 -6 6 h-82 l-10 8 v-8 h-8 a6 6 0 0 1 -6 -6 v-16 a6 6 0 0 1 6 -6 z" opacity=".55"/>
+          <text class="fig-text" x="24" y="126">plain-language feedback</text>
+          <path class="fig-line" d="M168 70 H226"/>
+          <path class="fig-accent" d="M220 66 L228 70 L220 74"/>
+          <rect class="fig-line" x="238" y="18" width="190" height="96" rx="4" stroke-dasharray="4 4"/>
+          <text class="fig-text" x="246" y="34">manufacturer limits</text>
+          <rect class="fig-fill" x="270" y="46" width="126" height="48" rx="4"/>
+          <text class="fig-text" x="306" y="74" style="fill:var(--ink)">Proxemic</text>
+          <path class="fig-line" d="M428 70 H486"/>
+          <path class="fig-accent" d="M480 66 L488 70 L480 74"/>
+          <rect class="fig-line" x="506" y="48" width="36" height="30" rx="5"/>
+          <circle class="fig-line" cx="517" cy="60" r="3"/>
+          <circle class="fig-line" cx="531" cy="60" r="3"/>
+          <path class="fig-line" d="M512 78 v10 M536 78 v10"/>
+          <path class="fig-accent" d="M556 52 q40 -24 80 -10"/>
+          <path class="fig-accent" d="M556 74 q40 26 80 14" stroke-dasharray="3 3"/>
+          <text class="fig-text" x="506" y="126">per-person behavior</text>
+        </svg>
+        <h3>Proxemic</h3>
+        <p class="org">With Siddhant Jena · Ongoing</p>
+        <p>A personalization layer for consumer robots. Owners describe in plain language how they want their robot to behave, and Proxemic turns that into per-person behavior adjustments within limits the manufacturer sets.</p>
+      </article>
+
+      <article class="proj">
+        <svg viewBox="0 0 320 120" aria-hidden="true">
+          <circle class="fig-fill" cx="160" cy="24" r="14"/>
+          <text class="fig-text" x="182" y="28">global state</text>
+          <rect class="fig-line" x="30" y="80" width="54" height="26" rx="3"/>
+          <rect class="fig-line" x="133" y="80" width="54" height="26" rx="3"/>
+          <rect class="fig-line" x="236" y="80" width="54" height="26" rx="3"/>
+          <path class="fig-line" d="M84 93 H133 M187 93 H236"/>
+          <path class="fig-accent" d="M57 80 Q 80 40 147 30 M160 38 V80 M263 80 Q 240 40 173 30"/>
+          <path class="fig-accent" d="M153 32 Q 100 50 66 78" stroke-dasharray="3 3"/>
+          <path class="fig-accent" d="M167 32 Q 220 50 254 78" stroke-dasharray="3 3"/>
+        </svg>
+        <h3>Hub-Feedback CNN</h3>
+        <p class="org">PyTorch · Jan 2026</p>
+        <p>A CNN with a recurrent global state module modeled on corticothalamic feedback loops, benchmarked against feedforward baselines under noise, blur, and occlusion. I built it on my own before joining Tang Lab, and it's what got me asking the questions I work on there now.</p>
+        <a class="more" href="https://github.com/VineethRaj201/hub-feedback-cnn" target="_blank" rel="noopener">View on GitHub</a>
+      </article>
+
+      <article class="proj">
+        <svg viewBox="0 0 320 120" aria-hidden="true">
+          <rect class="fig-line" x="20" y="30" width="62" height="70" rx="6"/>
+          <rect class="fig-fill" x="34" y="44" width="34" height="22" rx="3"/>
+          <path class="fig-line" d="M28 80 H74 M28 88 H74"/>
+          <text class="fig-text" x="22" y="118">sensor pod</text>
+          <path class="fig-accent" d="M98 58 q8 7 0 14 M108 52 q14 13 0 26"/>
+          <rect class="fig-line" x="134" y="44" width="56" height="42" rx="3"/>
+          <text class="fig-text" x="140" y="118">FastAPI</text>
+          <path class="fig-line" d="M190 65 H226"/>
+          <rect class="fig-line" x="226" y="34" width="76" height="62" rx="3"/>
+          <path class="fig-accent" d="M236 82 L254 70 L268 76 L292 50"/>
+          <text class="fig-text" x="236" y="118">dashboard</text>
+        </svg>
+        <h3>ShelfLife</h3>
+        <p class="org">DubHacks 2026 · C++/Arduino, Python, React</p>
+        <p>A smart-fridge monitor that estimates each item's remaining shelf life from its storage conditions. I led hardware and systems integration: ESP32 + SHT31 firmware streaming to a FastAPI/SQLite backend, the data path into the dashboard and the team's Bayesian freshness model, and a 3D-printed enclosure with a thermally isolated sensor pod, refined over six fit-test revisions.</p>
+      </article>
+
+      <article class="proj wide">
+        <h3>Tag!</h3>
+        <p class="org">DubHacks 2025 · Flutter, Dart, JavaScript</p>
+        <p>A gamified skill-learning social app with video posting, tagging, and difficulty-based progression. Integrated the 12Labs multimodal API to check uploaded videos against skill captions, and presented the architecture at a 12Labs webinar to their Head of Developer Experience.</p>
+      </article>
+
     </div>
   </section>
 
-  <!-- PUBLICATION -->
-  <section class="block" id="paper">
-    <div class="block-head rev"><span>Publication</span><hr/></div>
-    <div class="pub rev">
-      <p class="pub-venue">Frontiers in Medicine · 2024 · Co-first author</p>
-      <h3 class="pub-title">An AI-Based, Open-Access Diagnostic Tool for Early Diagnosis of Burkitt Lymphoma</h3>
-      <p class="pub-authors">
-        <u>Vineeth Rajesh</u>, Nikil Nambiar, Akshay Ashok, Sunil Nambiar, Renini Ashok,
-        Rajesh Uthamanthil, Teresa Lotodo, Shachi Mittal, Steven Kussick.
-        <em>Frontiers in Medicine</em> 2024;11:1345611. PMID: 38903819
-      </p>
-      <a href="https://doi.org/10.3389/fmed.2024.1345611" target="_blank" rel="noopener">Read the paper ↗</a>
+  <section id="publication">
+    <h2>Publication</h2>
+    <div class="pub">
+      <h3>An AI-Based, Open-Access Diagnostic Tool for Early Diagnosis of Burkitt Lymphoma</h3>
+      <p><u>Vineeth Rajesh</u>, Nikil Nambiar, Akshay Ashok, Sunil Nambiar, Renini Ashok, Rajesh Uthamanthil, Teresa Lotodo, Shachi Mittal, Steven Kussick. <i>Frontiers in Medicine</i>, 2024; 11:1345611. Co-first author.</p>
+      <a href="https://doi.org/10.3389/fmed.2024.1345611" target="_blank" rel="noopener">Read the paper</a>
     </div>
   </section>
 
-  <!-- TOOLKIT -->
-  <section class="block" id="kit">
-    <div class="block-head rev"><span>Toolkit</span><hr/></div>
-    <dl class="kit rev">
-      <div class="kit-row">
-        <dt>Languages</dt>
-        <dd><span class="key">Python</span><span class="key">C++</span><span>JavaScript</span><span>Java</span><span>Dart</span></dd>
-      </div>
-      <div class="kit-row">
-        <dt>ML / AI</dt>
-        <dd><span class="key">PyTorch</span><span class="key">Reinforcement Learning</span><span class="key">Computer Vision</span><span>CNNs</span><span>LLMs</span><span>TensorFlow</span><span>scikit-learn</span><span>NumPy</span><span>Pandas</span></dd>
-      </div>
-      <div class="kit-row">
-        <dt>Robotics</dt>
-        <dd><span class="key">NVIDIA Isaac Lab</span><span>PPO</span><span>Sim-to-Real</span><span>Domain Randomization</span><span>ROS</span></dd>
-      </div>
-      <div class="kit-row">
-        <dt>Vision</dt>
-        <dd><span>MediaPipe</span><span>Pose Estimation</span><span>Gradio</span><span>OpenCV</span></dd>
-      </div>
-      <div class="kit-row">
-        <dt>Platforms</dt>
-        <dd><span>Microsoft Azure</span><span>Weights &amp; Biases</span><span>Git</span><span>Google Colab</span><span>CUDA</span></dd>
-      </div>
-    </dl>
+  <section id="toolkit">
+    <h2>Toolkit</h2>
+    <div class="kit">
+      <div><h3>Languages</h3><p>Python, C++, Java, JavaScript, Dart</p></div>
+      <div><h3>ML and AI</h3><p>PyTorch, CUDA, TensorFlow/Keras, scikit-learn, CNNs, LLMs, NumPy, Pandas</p></div>
+      <div><h3>Robotics</h3><p>Isaac Sim/Lab, PPO, recurrent policies, RSL-RL, sim-to-real, domain randomization, ROS</p></div>
+      <div><h3>Vision</h3><p>MediaPipe, pose estimation, OpenCV, Gradio</p></div>
+      <div><h3>Hardware</h3><p>ESP32, Arduino, sensor integration, 3D printing, build123d</p></div>
+      <div><h3>Systems</h3><p>Linux, Git, FastAPI, React, REST APIs, Azure, Weights &amp; Biases</p></div>
+    </div>
   </section>
 
-  <!-- CONTACT -->
-  <section class="block" id="contact">
-    <div class="block-head rev"><span>Contact</span><hr/></div>
-    <div class="contact rev">
-      <p class="prose">Open to internships, research collaborations, and conversations about hard modeling problems. Easiest to reach by email.</p>
-      <ul>
-        <li><a href="mailto:vineethrajesh383@gmail.com">vineethrajesh383@gmail.com</a></li>
-        <li><a href="https://linkedin.com/in/vineethrajesh383" target="_blank" rel="noopener">linkedin.com/in/vineethrajesh383</a></li>
-        <li><a href="https://github.com/VineethRaj201" target="_blank" rel="noopener">github.com/VineethRaj201</a></li>
-      </ul>
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact">
+      <p>I'm open to internships, research collaborations, and conversations about robot learning or how we test what models can actually do. Email is the fastest way to reach me.</p>
+      <div class="links">
+        <a href="mailto:vineethrajesh383@gmail.com">vineethrajesh383@gmail.com</a>
+        <a href="https://github.com/VineethRaj201" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/in/vineethrajesh383" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
     </div>
   </section>
 
   <footer>
     <span>© 2026 Vineeth Rajesh</span>
-    <span>Redmond, WA</span>
+    <span>B.S. Computer Engineering, University of Washington, June 2028</span>
   </footer>
-</div>
+</main>
 
 <script>
 (function(){
-  /* scroll reveal */
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e,i){
-      if(e.isIntersecting){
-        setTimeout(function(){ e.target.classList.add('on'); }, i*50);
-        io.unobserve(e.target);
-      }
-    });
-  },{threshold:.08});
-  document.querySelectorAll('.rev').forEach(function(el){ io.observe(el); });
+  var svg = document.getElementById('drift');
+  var path = document.getElementById('driftPath');
+  var group = document.getElementById('cars');
+  var NS = 'http://www.w3.org/2000/svg';
+  var len = path.getTotalLength();
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // slip angle (degrees) rises through the turn, then recovers
+  function slip(t){
+    var x = (t - 0.3) / 0.6;
+    if (x <= 0 || x >= 1) return 0;
+    return 38 * Math.sin(Math.PI * x);
+  }
+
+  var stops = [0.1, 0.36, 0.56, 0.74, 0.92];
+  var cars = stops.map(function(t, i){
+    var p = path.getPointAtLength(t * len);
+    var q = path.getPointAtLength(Math.min(len, t * len + 1));
+    var vel = Math.atan2(q.y - p.y, q.x - p.x) * 180 / Math.PI;
+    var s = slip(t);
+    var g = document.createElementNS(NS, 'g');
+    g.setAttribute('class', 'car');
+    g.setAttribute('transform', 'translate(' + p.x + ' ' + p.y + ')');
+
+    // velocity vector
+    var v = document.createElementNS(NS, 'g');
+    v.setAttribute('transform', 'rotate(' + vel + ')');
+    v.innerHTML = '<line class="vel" x1="0" y1="0" x2="44" y2="0"/><path class="vel-head" d="M44 -3.5 L51 0 L44 3.5 Z"/>';
+    g.appendChild(v);
+
+    // body, rotated inward by slip angle (turn is to the left, so heading leads counter-clockwise)
+    var b = document.createElementNS(NS, 'g');
+    b.setAttribute('transform', 'rotate(' + (vel - s) + ')');
+    b.innerHTML = '<rect x="-16" y="-8.5" width="32" height="17" rx="4"/><rect class="nose" x="10" y="-8.5" width="6" height="17" rx="2"/>';
+    g.appendChild(b);
+
+    if (i === 2) {
+      var label = document.createElementNS(NS, 'text');
+      label.setAttribute('class', 'slip-label');
+      label.setAttribute('x', 26);
+      label.setAttribute('y', 30);
+      label.textContent = 'slip ≈ ' + Math.round(s) + '°';
+      g.appendChild(label);
+    }
+    group.appendChild(g);
+    return { el: g, t: t };
+  });
+
+  if (reduce) return;
+
+  // one orchestrated moment: trace the line, cars appear as it passes them
+  path.style.strokeDasharray = len;
+  path.style.strokeDashoffset = len;
+  cars.forEach(function(c){ c.el.style.opacity = 0; });
+  var dur = 1800, start = null;
+  function ease(x){ return 1 - Math.pow(1 - x, 3); }
+  function frame(ts){
+    if (!start) start = ts;
+    var k = Math.min(1, (ts - start) / dur), e = ease(k);
+    path.style.strokeDashoffset = len * (1 - e);
+    cars.forEach(function(c){ if (e >= c.t) c.el.style.transition = 'opacity .35s', c.el.style.opacity = 1; });
+    if (k < 1) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
 })();
 </script>
 </body>
